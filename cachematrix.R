@@ -4,33 +4,33 @@
 
 # The first function will create a matrix, calcualte the inverse and store it for later use.
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix(1:4, nrow=2, ncol=2)) {
        iM <- NULL
        set<- function (w) {
               x <<- w
               iM <<- NULL
        }
        get <- function() x
-       setIM <-function(solve) iM<<-solve
-       getIM <-function () iM
+       setiM <-function(solve) iM<<-solve
+       getiM <-function () iM
        list (set = set, get = get,
-             setIM = setIM,
-             getIM = getIM)
+             setiM = setiM,
+             getiM = getiM)
 }
 
-
+   
 # The second function will check to see if there is a stored value, and if so retrieve it;
 # if not, it will compute the inverse and then store it.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'       
-              iM <- x$getIM()
+              iM <- x$getiM()
               if(!is.null(iM)) {
                      message ("getting cached data")
                      return (iM)
               }
               data <- x$get()
               iM<-solve(data, ...)
-              x$setIM(iM)
+              x$setiM(iM)
               iM
-}    
+} 
